@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}직원 목록 - Python Mini HR{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>직원 목록</h2>
+    <div class="header-actions">
+        <a href="{{ url_for('add_employee') }}" class="btn btn-primary">+ 새 직원 추가</a>
+        <a href="{{ url_for('upload_excel') }}" class="btn btn-secondary">📥 엑셀 업로드</a>
+        <form method="POST" action="{{ url_for('recalculate_annual_leave') }}" style="display: inline;" onsubmit="return confirm('전체 직원의 연차를 입사일 기준으로 재계산하시겠습니까?');">
+            <button type="submit" class="btn btn-info">🔄 연차 일괄 재계산</button>
+        </form>
+    </div>
+</div>
+
+{% if employees %}
+<div class="table-container">
+    <table class="employee-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>이름</th>
+                <th>부서</th>
+                <th>직급</th>
+                <th>입사일</th>
+                <th>근속연수</th>
+                <th>남은연차</th>
+                <th>개인전화</th>
+                <th>작업</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>{{ employee.id }}</td>
+                <td><a href="{{ url_for('employee_detail', employee_id=employee.id) }}" class="link">{{ employee.name }}</a></td>
+                <td>{{ employee.department }}</td>
+                <td>{{ employee.position }}</td>
+                <td>{{ employee.hire_date }}</td>
+                <td>{{ employee.years_of_service or 0 }}년</td>
+                <td>{{ employee.remaining_leave }}일</td>
+                <td>{{ employee.personal_phone or '-' }}</td>
+                <td>
+                    <a href="{{ url_for('edit_employee', employee_id=employee.id) }}" class="btn btn-sm btn-edit">수정</a>
+                    <form method="POST" action="{{ url_for('delete_employee', employee_id=employee.id) }}" style="display: inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                        <button type="submit" class="btn btn-sm btn-delete">삭제</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <p>등록된 직원이 없습니다.</p>
+    <a href="{{ url_for('add_employee') }}" class="btn btn-primary">첫 직원 추가하기</a>
+</div>
+{% endif %}
+{% endblock %}

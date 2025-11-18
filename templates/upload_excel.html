@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}엑셀 데이터 업로드 - Python Mini HR{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>엑셀 파일로 직원 데이터 업로드</h2>
+</div>
+
+<div class="upload-container">
+    <div class="info-card">
+        <h3>📋 업로드 안내</h3>
+        <ul>
+            <li>엑셀 템플릿을 다운로드하여 직원 정보를 입력하세요</li>
+            <li>필수 항목(*): 이름, 주민번호, 부서, 직급, 입사일</li>
+            <li>입사일 형식: YYYY-MM-DD (예: 2020-01-15)</li>
+            <li>사대보험: O 또는 X로 입력</li>
+            <li><strong>연차 갯수와 근속 연수는 입사일 기준으로 자동 계산됩니다</strong></li>
+        </ul>
+        
+        <div class="download-section">
+            <a href="{{ url_for('download_excel_template') }}" class="btn btn-primary">
+                📥 엑셀 템플릿 다운로드
+            </a>
+        </div>
+    </div>
+    
+    <div class="upload-form-card">
+        <h3>파일 업로드</h3>
+        <form method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-input-wrapper">
+                <input type="file" id="file" name="file" accept=".xlsx,.xls" required>
+                <label for="file" class="file-label">
+                    <span class="file-icon">📁</span>
+                    <span class="file-text">엑셀 파일 선택 (.xlsx, .xls)</span>
+                </label>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">업로드 및 저장</button>
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">취소</a>
+            </div>
+        </form>
+    </div>
+    
+    <div class="warning-card">
+        <h3>⚠️ 주의사항</h3>
+        <ul>
+            <li>업로드된 데이터는 기존 직원 목록에 추가됩니다</li>
+            <li>중복 체크는 수동으로 확인해주세요</li>
+            <li>잘못된 형식의 데이터는 건너뛰고 오류 메시지를 표시합니다</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}직원 추가 - Python Mini HR{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>새 직원 추가</h2>
+</div>
+
+<div class="form-container">
+    <form method="POST" class="employee-form">
+        <h3>기본 정보</h3>
+        
+        <div class="form-group">
+            <label for="name">이름 *</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="ssn">주민번호 *</label>
+            <input type="text" id="ssn" name="ssn" required placeholder="000000-0000000">
+        </div>
+        
+        <div class="form-group">
+            <label for="address">주소</label>
+            <input type="text" id="address" name="address">
+        </div>
+        
+        <h3>연락처 정보</h3>
+        
+        <div class="form-group">
+            <label for="personal_email">개인 이메일</label>
+            <input type="email" id="personal_email" name="personal_email">
+        </div>
+        
+        <div class="form-group">
+            <label for="work_email">업무 이메일</label>
+            <input type="email" id="work_email" name="work_email">
+        </div>
+        
+        <div class="form-group">
+            <label for="personal_phone">개인 전화번호</label>
+            <input type="tel" id="personal_phone" name="personal_phone" placeholder="010-1234-5678">
+        </div>
+        
+        <div class="form-group">
+            <label for="work_phone">업무 전화번호</label>
+            <input type="tel" id="work_phone" name="work_phone" placeholder="02-1234-5678">
+        </div>
+        
+        <h3>근무 정보</h3>
+        
+        <div class="form-group">
+            <label for="department">부서 *</label>
+            <input type="text" id="department" name="department" required placeholder="예: 개발팀">
+        </div>
+        
+        <div class="form-group">
+            <label for="position">직급 *</label>
+            <input type="text" id="position" name="position" required placeholder="예: 대리">
+        </div>
+        
+        <div class="form-group">
+            <label for="hire_date">입사일 *</label>
+            <input type="date" id="hire_date" name="hire_date" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="resignation_date">퇴사일</label>
+            <input type="date" id="resignation_date" name="resignation_date">
+        </div>
+        
+        <div class="form-group">
+            <label for="years_of_service">근속 연수</label>
+            <input type="number" id="years_of_service" name="years_of_service" value="0" min="0">
+        </div>
+        
+        <h3>복지 정보</h3>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="has_insurance" name="has_insurance">
+                사대보험 가입
+            </label>
+        </div>
+        
+        <div class="form-group">
+            <label for="salary_bank">급여 은행</label>
+            <input type="text" id="salary_bank" name="salary_bank" placeholder="예: 신한은행">
+        </div>
+        
+        <div class="form-group">
+            <label for="salary_account">급여 계좌</label>
+            <input type="text" id="salary_account" name="salary_account" placeholder="계좌번호">
+        </div>
+        
+        <h3>연차 정보</h3>
+        
+        <div class="form-group">
+            <label for="annual_leave">연차 갯수</label>
+            <input type="number" id="annual_leave" name="annual_leave" value="15" min="0" readonly style="background-color: #f0f0f0;">
+            <small style="color: #7f8c8d; display: block; margin-top: 0.5rem;">
+                ℹ️ 입사일 기준으로 자동 계산됩니다 (한국 근로기준법)
+            </small>
+        </div>
+        
+        <div class="form-group">
+            <label for="used_leave">사용 연차일</label>
+            <input type="number" id="used_leave" name="used_leave" value="0" min="0">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">저장</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">취소</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

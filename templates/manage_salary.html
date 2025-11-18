@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}급여 정보 관리 - Python Mini HR{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>{{ employee.name }} - {{ year }}년 급여 정보</h2>
+</div>
+
+<div class="form-container">
+    <form method="POST" class="salary-form">
+        <input type="hidden" name="year" value="{{ year }}">
+        
+        <div class="year-selector">
+            <label for="year_input">연도:</label>
+            <input type="number" id="year_input" name="year" value="{{ year }}" min="2000" max="2100" required>
+        </div>
+        
+        <h3>월별 급여 (원)</h3>
+        
+        <div class="salary-grid">
+            <div class="form-group">
+                <label for="month_01">1월</label>
+                <input type="number" id="month_01" name="month_01" value="{{ salary_info.month_01 if salary_info else 0 }}" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="month_02">2월</label>
+                <input type="number" id="month_02" name="month_02" value="{{ salary_info.month_02 if salary_info else 0 }}" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="month_03">3월</label>
+                <input type="number" id="month_03" name="month_03" value="{{ salary_info.month_03 if salary_info else 0 }}" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="month_04">4월</label>
+                <input type="number" id="month_04" name="month_04" value="{{ salary_info.month_04 if salary_info else 0 }}" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="month_05">5월</label>
+                <input type="number" id="month_05" name="month_05" value="{{ salary_info.month_05 if salary_info else 0 }}" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="month_06">6월</label>
+                <input type="number" id="month_06" name="month_06" value="{{ salary_info.month_06 if salary_info else 0 }}" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="month_07">7월</label>
+                <input type="number" id="month_07" name="month_07" value="{{ salary_info.month_07 if salary_info else 0 }}" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="month_08">8월</label>
+                <input type="number" id="month_08" name="month_08" value="{{ salary_info.month_08 if salary_info else 0 }}" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="month_09">9월</label>
+                <input type="number" id="month_09" name="month_09" value="{{ salary_info.month_09 if salary_info else 0 }}" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="month_10">10월</label>
+                <input type="number" id="month_10" name="month_10" value="{{ salary_info.month_10 if salary_info else 0 }}" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="month_11">11월</label>
+                <input type="number" id="month_11" name="month_11" value="{{ salary_info.month_11 if salary_info else 0 }}" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="month_12">12월</label>
+                <input type="number" id="month_12" name="month_12" value="{{ salary_info.month_12 if salary_info else 0 }}" min="0">
+            </div>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">저장</button>
+            <a href="{{ url_for('employee_detail', employee_id=employee.id, year=year) }}" class="btn btn-secondary">취소</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
