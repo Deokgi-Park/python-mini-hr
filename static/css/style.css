@@ -67,6 +67,14 @@ body {
     background-color: #229954;
 }
 
+.nav-links .btn-upload {
+    background-color: #3498db;
+}
+
+.nav-links .btn-upload:hover {
+    background-color: #2980b9;
+}
+
 /* 알림 메시지 */
 .alert {
     padding: 1rem;
@@ -100,6 +108,12 @@ body {
 .page-header h2 {
     color: #2c3e50;
     font-size: 2rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }
 
 /* 버튼 */
@@ -148,6 +162,15 @@ body {
 
 .btn-delete:hover {
     background-color: #c0392b;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: #138496;
 }
 
 .btn-sm {
@@ -488,4 +511,87 @@ footer p {
     margin-right: 0.5rem;
     width: auto;
     cursor: pointer;
+}
+
+/* 엑셀 업로드 페이지 */
+.upload-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.info-card, .upload-form-card, .warning-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.info-card h3, .upload-form-card h3, .warning-card h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.info-card ul, .warning-card ul {
+    margin-left: 1.5rem;
+    line-height: 2;
+}
+
+.download-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.file-input-wrapper {
+    position: relative;
+}
+
+.file-input-wrapper input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    border: 2px dashed #3498db;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.file-label:hover {
+    background-color: #e9ecef;
+    border-color: #2980b9;
+}
+
+.file-icon {
+    font-size: 2rem;
+}
+
+.file-text {
+    font-size: 1.1rem;
+    color: #495057;
+}
+
+.warning-card {
+    border-left: 4px solid #f39c12;
+}
+
+.info-card {
+    border-left: 4px solid #3498db;
 }

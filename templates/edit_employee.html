@@ -98,7 +98,10 @@
         
         <div class="form-group">
             <label for="annual_leave">연차 갯수</label>
-            <input type="number" id="annual_leave" name="annual_leave" value="{{ employee.annual_leave or 15 }}" min="0">
+            <input type="number" id="annual_leave" name="annual_leave" value="{{ employee.annual_leave or 15 }}" min="0" readonly style="background-color: #f0f0f0;">
+            <small style="color: #7f8c8d; display: block; margin-top: 0.5rem;">
+                ℹ️ 입사일 기준으로 자동 계산됩니다 (한국 근로기준법)
+            </small>
         </div>
         
         <div class="form-group">
