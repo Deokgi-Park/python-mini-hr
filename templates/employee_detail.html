@@ -23,12 +23,32 @@
             <span class="detail-value">{{ employee.name }}</span>
         </div>
         <div class="detail-row">
-            <span class="detail-label">이메일:</span>
-            <span class="detail-value">{{ employee.email }}</span>
+            <span class="detail-label">주민번호:</span>
+            <span class="detail-value">{{ employee.ssn }}</span>
         </div>
         <div class="detail-row">
-            <span class="detail-label">전화번호:</span>
-            <span class="detail-value">{{ employee.phone }}</span>
+            <span class="detail-label">주소:</span>
+            <span class="detail-value">{{ employee.address or '-' }}</span>
+        </div>
+    </div>
+    
+    <div class="detail-card">
+        <h3>연락처 정보</h3>
+        <div class="detail-row">
+            <span class="detail-label">개인 이메일:</span>
+            <span class="detail-value">{{ employee.personal_email or '-' }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">업무 이메일:</span>
+            <span class="detail-value">{{ employee.work_email or '-' }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">개인 전화번호:</span>
+            <span class="detail-value">{{ employee.personal_phone or '-' }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">업무 전화번호:</span>
+            <span class="detail-value">{{ employee.work_phone or '-' }}</span>
         </div>
     </div>
     
@@ -46,6 +66,48 @@
             <span class="detail-label">입사일:</span>
             <span class="detail-value">{{ employee.hire_date }}</span>
         </div>
+        {% if employee.resignation_date %}
+        <div class="detail-row">
+            <span class="detail-label">퇴사일:</span>
+            <span class="detail-value">{{ employee.resignation_date }}</span>
+        </div>
+        {% endif %}
+        <div class="detail-row">
+            <span class="detail-label">근속 연수:</span>
+            <span class="detail-value">{{ employee.years_of_service or 0 }}년</span>
+        </div>
+    </div>
+    
+    <div class="detail-card">
+        <h3>복지 정보</h3>
+        <div class="detail-row">
+            <span class="detail-label">사대보험:</span>
+            <span class="detail-value">{% if employee.has_insurance %}가입{% else %}미가입{% endif %}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">급여 은행:</span>
+            <span class="detail-value">{{ employee.salary_bank or '-' }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">급여 계좌:</span>
+            <span class="detail-value">{{ employee.salary_account or '-' }}</span>
+        </div>
+    </div>
+    
+    <div class="detail-card">
+        <h3>연차 정보</h3>
+        <div class="detail-row">
+            <span class="detail-label">총 연차:</span>
+            <span class="detail-value">{{ employee.annual_leave or 0 }}일</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">사용 연차:</span>
+            <span class="detail-value">{{ employee.used_leave or 0 }}일</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">남은 연차:</span>
+            <span class="detail-value" style="font-weight: bold; color: #27ae60;">{{ employee.remaining_leave }}일</span>
+        </div>
     </div>
     
     <div class="detail-card">
@@ -61,6 +123,78 @@
         </div>
         {% endif %}
     </div>
+</div>
+
+<!-- 급여 정보 섹션 -->
+<div class="salary-section">
+    <div class="section-header">
+        <h3>급여 정보</h3>
+        <div class="salary-controls">
+            <label for="year-select">연도 선택:</label>
+            <select id="year-select" onchange="window.location.href='?year=' + this.value">
+                {% for year in years %}
+                <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}년</option>
+                {% endfor %}
+                {% if selected_year not in years %}
+                <option value="{{ selected_year }}" selected>{{ selected_year }}년</option>
+                {% endif %}
+            </select>
+            <a href="{{ url_for('manage_salary', employee_id=employee.id, year=selected_year) }}" class="btn btn-sm btn-primary">급여 입력/수정</a>
+        </div>
+    </div>
+    
+    {% if salary_info %}
+    <div class="salary-table-container">
+        <table class="salary-table">
+            <thead>
+                <tr>
+                    <th>1월</th>
+                    <th>2월</th>
+                    <th>3월</th>
+                    <th>4월</th>
+                    <th>5월</th>
+                    <th>6월</th>
+                    <th>7월</th>
+                    <th>8월</th>
+                    <th>9월</th>
+                    <th>10월</th>
+                    <th>11월</th>
+                    <th>12월</th>
+                    <th>연봉 합계</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ "{:,}".format(salary_info.month_01) }}원</td>
+                    <td>{{ "{:,}".format(salary_info.month_02) }}원</td>
+                    <td>{{ "{:,}".format(salary_info.month_03) }}원</td>
+                    <td>{{ "{:,}".format(salary_info.month_04) }}원</td>
+                    <td>{{ "{:,}".format(salary_info.month_05) }}원</td>
+                    <td>{{ "{:,}".format(salary_info.month_06) }}원</td>
+                    <td>{{ "{:,}".format(salary_info.month_07) }}원</td>
+                    <td>{{ "{:,}".format(salary_info.month_08) }}원</td>
+                    <td>{{ "{:,}".format(salary_info.month_09) }}원</td>
+                    <td>{{ "{:,}".format(salary_info.month_10) }}원</td>
+                    <td>{{ "{:,}".format(salary_info.month_11) }}원</td>
+                    <td>{{ "{:,}".format(salary_info.month_12) }}원</td>
+                    <td style="font-weight: bold; background-color: #f0f0f0;">
+                        {{ "{:,}".format(
+                            salary_info.month_01 + salary_info.month_02 + salary_info.month_03 + 
+                            salary_info.month_04 + salary_info.month_05 + salary_info.month_06 + 
+                            salary_info.month_07 + salary_info.month_08 + salary_info.month_09 + 
+                            salary_info.month_10 + salary_info.month_11 + salary_info.month_12
+                        ) }}원
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-salary">
+        <p>{{ selected_year }}년도 급여 정보가 없습니다.</p>
+        <a href="{{ url_for('manage_salary', employee_id=employee.id, year=selected_year) }}" class="btn btn-primary">급여 정보 입력</a>
+    </div>
+    {% endif %}
 </div>
 
 <div class="danger-zone">
