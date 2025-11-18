@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}{{ employee.name }} - 직원 상세 - Python Mini HR{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>직원 상세 정보</h2>
+    <div>
+        <a href="{{ url_for('edit_employee', employee_id=employee.id) }}" class="btn btn-edit">수정</a>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">목록으로</a>
+    </div>
+</div>
+
+<div class="detail-container">
+    <div class="detail-card">
+        <h3>기본 정보</h3>
+        <div class="detail-row">
+            <span class="detail-label">ID:</span>
+            <span class="detail-value">{{ employee.id }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">이름:</span>
+            <span class="detail-value">{{ employee.name }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">이메일:</span>
+            <span class="detail-value">{{ employee.email }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">전화번호:</span>
+            <span class="detail-value">{{ employee.phone }}</span>
+        </div>
+    </div>
+    
+    <div class="detail-card">
+        <h3>근무 정보</h3>
+        <div class="detail-row">
+            <span class="detail-label">부서:</span>
+            <span class="detail-value">{{ employee.department }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">직급:</span>
+            <span class="detail-value">{{ employee.position }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">입사일:</span>
+            <span class="detail-value">{{ employee.hire_date }}</span>
+        </div>
+    </div>
+    
+    <div class="detail-card">
+        <h3>시스템 정보</h3>
+        <div class="detail-row">
+            <span class="detail-label">등록일:</span>
+            <span class="detail-value">{{ employee.created_at }}</span>
+        </div>
+        {% if employee.updated_at %}
+        <div class="detail-row">
+            <span class="detail-label">수정일:</span>
+            <span class="detail-value">{{ employee.updated_at }}</span>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="danger-zone">
+    <h3>위험 영역</h3>
+    <p>이 작업은 되돌릴 수 없습니다.</p>
+    <form method="POST" action="{{ url_for('delete_employee', employee_id=employee.id) }}" onsubmit="return confirm('정말로 이 직원을 삭제하시겠습니까?');">
+        <button type="submit" class="btn btn-delete">직원 삭제</button>
+    </form>
+</div>
+{% endblock %}

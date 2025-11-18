@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}직원 수정 - Python Mini HR{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>직원 정보 수정</h2>
+</div>
+
+<div class="form-container">
+    <form method="POST" class="employee-form">
+        <div class="form-group">
+            <label for="name">이름 *</label>
+            <input type="text" id="name" name="name" value="{{ employee.name }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">이메일 *</label>
+            <input type="email" id="email" name="email" value="{{ employee.email }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="phone">전화번호 *</label>
+            <input type="tel" id="phone" name="phone" value="{{ employee.phone }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="department">부서 *</label>
+            <input type="text" id="department" name="department" value="{{ employee.department }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="position">직급 *</label>
+            <input type="text" id="position" name="position" value="{{ employee.position }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="hire_date">입사일 *</label>
+            <input type="date" id="hire_date" name="hire_date" value="{{ employee.hire_date }}" required>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">저장</button>
+            <a href="{{ url_for('employee_detail', employee_id=employee.id) }}" class="btn btn-secondary">취소</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
