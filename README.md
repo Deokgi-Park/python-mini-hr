@@ -40,7 +40,11 @@ pip install -r requirements.txt
 ### 3. 애플리케이션 실행
 
 ```bash
+# 일반 실행 (프로덕션 모드)
 python app.py
+
+# 개발 모드 (디버그 모드)
+FLASK_DEBUG=1 python app.py
 ```
 
 ### 4. 브라우저에서 접속
